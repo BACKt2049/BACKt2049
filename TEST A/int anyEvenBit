@@ -1,8 +1,11 @@
 int anyEvenBit(int x)
 {
-//f = 0x33333333 获得所有偶数位信息的工具
+//mask = 0x55 获得偶数位信息的工具
 //如果 x & f 为 0 则偶数位上无1
-int f = 0x33333333;
-x = !(x&f);
-return !x;
+int mask = 0x55;
+int x1 = x>>8 & mask;
+int x2 = x1>>8 & mask;
+int x3 = x2>>8 & mask;
+int x = x& mask;
+return !!(x|x1|x2|x3);
 }

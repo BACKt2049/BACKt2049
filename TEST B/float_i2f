@@ -3,11 +3,20 @@ unsigned float_i2f(int x)
 int sign = x &0x80000000;
 int frac;
 int exp;
+int delta;
 int i = 30;
-if(sign){x = ~x + 1;}
+if(sign){x = -x;}
 int i = 30
 while(!(x >> i)){i = i + ~0;}
 exp = i + 127;
 x = (31 - i);
-frac = 
+frac = 0x7fffff & (x >> 8);
+x = x & 0xff;
+delta = x > 128 || ((x == 128) && (fraction & 1));
+if(frac >> 23)
+{
+frac  = frac & 0x7fffff;
+exp = exp + 1;
+}
+return sign|(exp << 23)| frac;
 }

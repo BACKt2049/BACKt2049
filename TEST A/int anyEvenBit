@@ -1,11 +1,11 @@
-int anyEvenBit(int x)
-{
-//mask = 0x55 获得偶数位信息的工具
-//如果 x & f 为 0 则偶数位上无1
-int mask = 0x55;
-int x1 = x>>8 & mask;
-int x2 = x1>>8 & mask;
-int x3 = x2>>8 & mask;
-int x = x& mask;
-return !!(x|x1|x2|x3);
+int anyEvenBit(int x) {
+    // mask = 0x55 获得偶数位信息的工具
+    int mask = 0x55;
+    int x1 = x & mask;
+//后面实际上就是依次取偶数位
+    int x2 = (x >> 8) & mask;
+    int x3 = (x >> 16) & mask;
+    int x4 = (x >> 24) & mask;
+//|其实就是取并集，这么多偶数位情况并起来，会反映整体情况。
+    return !!(x1 | x2 | x3 | x4);
 }

@@ -1,8 +1,12 @@
 int isPower2(int x)
 {
-int base = ~(!x) + 1;
+//Note that no negative number is a power of 2
+int base = x>>31;
 int chek = x&(x + ~0);
-//if (base == 0){return 0;}
+//if (x <= 0){return 0;}
 //else{return !chek; }
-return (0&base)|((!chek)&~base);
+int result = (!chek)&~base;//保证x非负的时候reult为0
+int xx = !!x;
+result = result & xx;//保证x为0时候result为0
+return result;
 }
